@@ -7,6 +7,9 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {},
+  daisyui: {
+    themes: ["emerald"],
+  },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
 };
 export default config;

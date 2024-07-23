@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useMemo } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FormState, SubmitHandler, useForm } from "react-hook-form";
 import debounce from "lodash.debounce";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
@@ -21,7 +21,7 @@ const BillingConfig = () => {
     getFieldState,
     trigger,
     clearErrors,
-    formState: { errors, isValid, touchedFields, validatingFields },
+    formState: { errors, isValid, touchedFields },
   } = useForm<BillingConfigSchema>({
     mode: "all",
     resolver: yupResolver(schema),
@@ -81,7 +81,7 @@ const BillingConfig = () => {
   return (
     <div className="p-8 m-4 flex flex-col flex-wrap border rounded-md">
       <div className="prose">
-        <h2>Set up your subscription</h2>
+        <h1 className="text-primary">Set up your subscription</h1>
       </div>
       <form
         className="mt-8 flex flex-wrap sm:max-w-xl"
@@ -89,6 +89,7 @@ const BillingConfig = () => {
       >
         <div className="flex w-full flex-wrap sm:flex-nowrap">
           <Input
+            touched={touchedFields.initialPrice}
             error={errors.initialPrice}
             className="w-[120px]"
             type="number"
@@ -105,12 +106,14 @@ const BillingConfig = () => {
             <Label label="Billing Frequency" />
             <div className="flex">
               <Input
+                touched={touchedFields.billingFrequency?.count}
                 error={errors.billingFrequency?.count}
                 type="number"
                 className="w-[80px]"
                 {...register("billingFrequency.count")}
               />
               <Select
+                touched={touchedFields.billingFrequency?.unit}
                 error={errors.billingFrequency?.unit}
                 className="ml-2 w-[120px]"
                 {...register("billingFrequency.unit")}
@@ -123,6 +126,7 @@ const BillingConfig = () => {
           </div>
 
           <Input
+            touched={touchedFields.periodPayment}
             error={errors.periodPayment}
             type="number"
             className="sm:ml-6 w-[140px]"
@@ -142,12 +146,14 @@ const BillingConfig = () => {
                   !allValues.trialPeriod ||
                   allValues.trialPeriod?.unit === "None"
                 }
+                touched={touchedFields.trialPeriod?.count}
                 error={errors.trialPeriod?.count}
                 type="number"
                 className="w-[80px]"
                 {...register("trialPeriod.count")}
               />
               <Select
+                touched={touchedFields.trialPeriod?.count}
                 error={errors.trialPeriod?.unit}
                 className="ml-2 w-[120px]"
                 {...register("trialPeriod.unit", {
@@ -168,6 +174,7 @@ const BillingConfig = () => {
 
           <Select
             error={errors.duration}
+            touched={touchedFields.duration}
             className="w-[140px] sm:ml-6"
             label="Duration"
             {...register("duration")}
@@ -178,6 +185,7 @@ const BillingConfig = () => {
 
           {isCustomBillingCycles && (
             <Input
+              touched={touchedFields.billingCycles}
               error={errors.billingCycles}
               className="w-[120px] ml-6"
               label="Billing Cycles"

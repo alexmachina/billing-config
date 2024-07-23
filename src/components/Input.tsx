@@ -4,11 +4,12 @@ import { FieldError } from "react-hook-form";
 import Label from "./Label";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  touched?: boolean;
   label?: string;
   error?: FieldError;
 }
 const Input: React.FC<InputProps> = forwardRef(function Input(
-  { className, label, error, ...props },
+  { className, label, error, touched, ...props },
   ref: React.Ref<HTMLInputElement>
 ) {
   return (
@@ -17,6 +18,7 @@ const Input: React.FC<InputProps> = forwardRef(function Input(
         className={clsx("input input-bordered w-full", {
           "input-error": error,
           "no-arrows": props.type === "number",
+          "input-success": touched && !error,
         })}
         ref={ref}
         {...props}
