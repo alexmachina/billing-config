@@ -79,15 +79,15 @@ const BillingConfig = () => {
   const onSubmit: SubmitHandler<BillingConfigSchema> = () => {};
 
   return (
-    <div className="p-8 flex flex-col flex-wrap border rounded-md">
+    <div className="p-8 m-4 flex flex-col flex-wrap border rounded-md">
       <div className="prose">
         <h2>Set up your subscription</h2>
       </div>
       <form
-        className="mt-8 flex flex-wrap max-w-xl"
+        className="mt-8 flex flex-wrap sm:max-w-xl"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex w-full">
+        <div className="flex w-full flex-wrap sm:flex-nowrap">
           <Input
             error={errors.initialPrice}
             className="w-[120px]"
@@ -101,7 +101,7 @@ const BillingConfig = () => {
             })}
           />
 
-          <div className="flex-col ml-6">
+          <div className="flex-col sm:ml-6">
             <Label label="Billing Frequency" />
             <div className="flex">
               <Input
@@ -125,13 +125,13 @@ const BillingConfig = () => {
           <Input
             error={errors.periodPayment}
             type="number"
-            className="ml-6 w-[140px]"
+            className="sm:ml-6 w-[140px]"
             label={periodPaymentLabel}
             {...register("periodPayment")}
           />
         </div>
 
-        <div className="flex w-full ">
+        <div className="flex w-full flex-wrap ">
           <div className="flex-col">
             <div className="label">
               <span className="label-text">Trial Period</span>
@@ -168,7 +168,7 @@ const BillingConfig = () => {
 
           <Select
             error={errors.duration}
-            className="w-[140px] ml-6"
+            className="w-[140px] sm:ml-6"
             label="Duration"
             {...register("duration")}
           >
