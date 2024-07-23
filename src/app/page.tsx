@@ -1,5 +1,15 @@
 import BillingConfig from "./_components/BillingConfig/BillingConfig";
 
 export default function Home() {
-  return <BillingConfig />;
+  return (
+    <main className="flex  flex-col min-h-screen items-center justify-center">
+      <BillingConfig />
+      <div className="absolute bottom-4">
+        By{" "}
+        <a className="link prima" href="https://github.com/alexmachina">
+          @alexmachina
+        </a>
+      </div>
+    </main>
+  );
 }
